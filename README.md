@@ -20,6 +20,13 @@ La pérdida parcial conserva su cobertura de 60% y no se convierte en cumplimien
 
 ## Límites y publicación
 
-Los CSV son transcripciones de los anexos del enunciado, no exportaciones originales. La frecuencia de jitter de 60 s es un supuesto para cuantificar cobertura; se debe verificar la independencia respecto del colector de pérdida. El expediente mezcla bases para MTTR: el informe muestra ambas. No hay URL de repositorio ni tag publicado acreditados en este paquete.
+Los CSV son transcripciones de los anexos del enunciado, no exportaciones originales. La frecuencia de jitter de 60 s es un supuesto para cuantificar cobertura; se debe verificar la independencia respecto del colector de pérdida. El expediente mezcla bases para MTTR: el informe muestra ambas.
 
-Integrar la carpeta ejemplos/caso-valle-elqui y los cambios de herramientas en el toolkit existente. Revisar compatibilidad antes de sustituir archivos. Seguir los comandos del informe para publicar v1.1 una vez identificado el remoto. No sobrescribir un tag v1.1 existente.
+## Repositorio y entrega
+
+- Repositorio: https://github.com/JoseTapiaIna/sla-toolkit-tapia
+- Caso: ejemplos/caso-valle-elqui/
+- Etiqueta requerida para la entrega: v1.1
+- Licencia del código: MIT
+
+La versión etiquetada debe incluir los archivos y resultados verificados del caso.
