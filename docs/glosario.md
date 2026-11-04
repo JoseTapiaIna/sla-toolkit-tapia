@@ -1,0 +1,3 @@
+# Glosario
+
+SLA: acuerdo de nivel de servicio. SLR: requisito del cliente. SLI: indicador medido. SLO: objetivo acordado. OLA: acuerdo operativo interno. CPE: equipo en las instalaciones del cliente. PE: router de borde del proveedor. RTT: tiempo de ida y vuelta. NMS: sistema de gestión y monitoreo. MTBF: tiempo medio entre fallas. MTTR: tiempo medio de restauración; en este contrato se aplica un límite por incidente. TWAMP: protocolo de medición activa bidireccional. pp: puntos porcentuales. Demarcación: límite técnico de responsabilidad y medición. Crédito: compensación calculada con el cargo mensual según el contrato.
