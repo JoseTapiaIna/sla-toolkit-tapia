@@ -26,8 +26,6 @@ Se evalúan las cláusulas 2.1, 2.2, 3.1 a 3.5, 4.1, 4.2, 5.1, 6.1, 6.2, 7.2 y 8
 
 La evidencia contractual termina en el puerto LAN del CPE. Las pruebas PE-core no representan ese trayecto y el resultado de un notebook por Wi-Fi incorpora factores ajenos al punto de medición pactado. El crédito se determina por las cláusulas del SLA, no por la percepción de calidad ni por un máximo observado aislado.
 
-## 3 Alcance y referencias
-
 ### 3 1 Matriz de compromisos contractuales
 
 | Cláusula y métrica | Objetivo y período | Punto y método | Estadístico |
@@ -364,33 +362,21 @@ Validación ejecutada: cinco pruebas satisfactorias. Se verificaron el crédito 
 
 ### 8 4 Anexo C Integración y versionado
 
-La carpeta del caso debe integrarse en ejemplos/caso-valle-elqui/ del toolkit del grupo. La versión 1.1 del paquete está preparada; no se acredita publicación remota ni existencia de un tag público. El repositorio y sus responsables deben identificarse antes de cerrar el requisito de publicación de la pauta.
+### 8 4 Anexo C Integración y versionado
 
-| Campo de entrega | Estado |
+El código, las mediciones y el informe del caso se mantienen en el repositorio del toolkit. La ejecución de la calculadora y las pruebas se documenta en el anexo B.
+
+| Campo de entrega | Identificación |
 | --- | --- |
-| Repositorio del grupo | https://github.com/JoseTapiaIna/sla-toolkit-tapia.git |
+| Repositorio | https://github.com/JoseTapiaIna/sla-toolkit-tapia |
 | Ruta del caso | ejemplos/caso-valle-elqui/ |
-| Versión de publicación requerida | v1.1 |
-| Integrantes | Jose Alberto Tapia Cerda |
-| Licencia | Conservar la del toolkit existente; si es nuevo, acordar licencia para el código y excluir material docente de terceros |
+| Etiqueta de entrega | v1.1 |
+| Integrante | Jose Alberto Tapia Cerda |
+| Licencia del código | MIT |
 
-Secuencia propuesta para un repositorio existente con remoto origin y tag v1.1 aún no utilizado. Revisar git status y compatibilidad de la calculadora antes de integrar. No sobrescribir un tag publicado ni sustituir historial previo.
+Las correcciones se registran en CHANGELOG.md y se integran a main mediante una rama de trabajo. La etiqueta de entrega debe apuntar al commit que contiene los archivos verificados.
 
-```text
-git switch -c caso/valle-elqui
-git add ejemplos/caso-valle-elqui/ herramientas/ tests/
-git add docs/ formulas/ plantillas/ README.md CHANGELOG.md requirements.txt
-git commit -m "Agrega verificacion SLA Valle de Elqui septiembre 2026"
-git switch main
-git merge caso/valle-elqui
-git tag -a v1.1 -m "Caso Valle de Elqui septiembre 2026"
-git push origin main
-git push origin v1.1
-```
-
-Registrar en CHANGELOG.md: incorporación del caso, promedio ponderado de jitter, cobertura de mediciones, verificación por ticket y cálculo del crédito. Las funciones de ponderación, respuesta y restauración ya se incluyen en la calculadora adjunta; no se presentan como mejoras pendientes.
-
-Mejoras pendientes de la herramienta: ingestión de registros crudos; cálculo de cobertura temporal desde timestamps; clasificación asistida de exclusiones; cómputo de intervalos con zona horaria; y verificación de las dos direcciones de throughput. La revisión de procedencia TWAMP sigue siendo una validación de evidencia, no un resultado que pueda resolver el código sin registros.
+Las mejoras futuras incluyen la ingestión de registros crudos, el cálculo de cobertura mediante timestamps y la verificación de ambas direcciones de throughput.
 
 ### 8 5 Anexo D Datos necesarios para cerrar las salvedades
 
