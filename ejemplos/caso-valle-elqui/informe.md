@@ -277,7 +277,7 @@ Validación ejecutada: cinco pruebas satisfactorias. Se verificaron el crédito 
 8 4 Anexo C Integración y versionado
 La carpeta del caso debe integrarse en ejemplos/caso-valle-elqui/ del toolkit del grupo. La versión 1.1 del paquete está preparada; no se acredita publicación remota ni existencia de un tag público. El repositorio y sus responsables deben identificarse antes de cerrar el requisito de publicación de la pauta.
 Campo de entrega	Estado
-Repositorio del grupo	URL PENDIENTE
+Repositorio del grupo	https://github.com/JoseTapiaIna/sla-toolkit-tapia.git
 Ruta del caso	ejemplos/caso-valle-elqui/
 Versión de publicación requerida	v1.1; pendiente de publicar en el remoto real
 Integrantes	Completar en la identificación
