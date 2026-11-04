@@ -1,6 +1,10 @@
 # Toolkit de verificación de SLA de Agrícola Valle de Elqui
 
-Caso EVA 3, septiembre de 2026, enlace NorteNet de 200 Mbps. Paquete para integrar en el repositorio del grupo. Incluye cálculo reproducible, objetivos y trazabilidad de evidencia. No contiene telemetría original ni prueba de publicación remota.
+Toolkit académico para verificar el SLA del enlace dedicado de 200 Mbps de Agrícola Valle de Elqui SpA, contratado a NorteNet durante septiembre de 2026.
+
+Incluye objetivos contractuales, mediciones transcritas del caso, calculadora, pruebas, resultados e informe técnico.
+
+Autor: Jose Alberto Tapia Cerda.
 
 ## Ejecución
 
