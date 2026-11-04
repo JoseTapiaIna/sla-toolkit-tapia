@@ -1,0 +1,4 @@
+metrica,valor,unidad,fuente,motivo
+latencia,22.1,ms,Reporte NorteNet PE a core Santiago,Fuera de demarcacion y destino pactado
+perdida,0.18,%,Reporte NorteNet PE a core,Fuera de demarcacion
+throughput,95,Mbps,Speedtest notebook Wi-Fi 18-sep,Punto medio y herramienta no pactados

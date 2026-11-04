@@ -1,0 +1,11 @@
+Ejecución: 4 de noviembre de 2026
+Comando: python3 -m unittest discover -s tests -v
+
+test_caso_y_ponderacion ... ok
+test_dato_ausente_no_cumple_por_defecto ... ok
+test_falta_una_prueba ... ok
+test_limite_respuesta_inclusivo ... ok
+test_tramo_99_5_y_tope ... ok
+
+Ran 5 tests
+OK

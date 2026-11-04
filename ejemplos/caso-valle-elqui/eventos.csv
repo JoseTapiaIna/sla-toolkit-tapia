@@ -1,0 +1,6 @@
+evento,fecha,inicio,fin,duracion_min,atribuible_min,clasificacion,clausula
+E1,2026-09-03,02:00,05:30,210,0,excluido,6.1a y 6.2
+E2,2026-09-09,14:12,15:07,55,55,atribuible,3.1 y 6.1b sin declaracion
+E3,2026-09-15,10:40,12:25,105,0,cliente,7.2 y 6.1c
+E4,2026-09-21,22:05,23:20,75,75,atribuible,3.1
+E5,2026-09-27,08:30,09:00,30,30,atribuible,6.1a aviso insuficiente

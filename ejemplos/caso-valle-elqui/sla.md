@@ -1,0 +1,3 @@
+# SLA evaluado
+
+Fuente contractual: EVA 3 CASO DE ESTUDIO.pdf, página 2. Servicio de 200 Mbps simétricos, demarcación LAN del CPE en Vicuña. Objetivos: disponibilidad mensual ≥99.9%; RTT ICMP cada 60 s CPE a servidor La Serena ≤30 ms promedio; jitter TWAMP ≤10 ms promedio; pérdida TWAMP ≤0.5%; throughput promedio de al menos cuatro pruebas iperf3 TCP ≥180 Mbps. Respuesta ≤60 min en el 100% de los tickets y restauración ≤240 min por incidente del proveedor. Cobertura mínima 90%. Aviso de mantención ≥72 h y máximo 4 h/mes. Energía y UPS a cargo del cliente. Exclusiones se consideran disponibles sin reducir el denominador. Cargo CLP1200000 neto; tramos de crédito de disponibilidad 10%, 25% y 50%; otros incumplimientos enumerados 5% cada uno; tope 50%.

@@ -1,0 +1,73 @@
+{
+  "periodo": "2026-09",
+  "resultados": {
+    "disponibilidad": {
+      "objetivo": "99.9",
+      "operador": ">=",
+      "unidad": "%",
+      "medido": "99.629629629629629629629629629630",
+      "cobertura": "1",
+      "veredicto": "NO CUMPLE"
+    },
+    "latencia": {
+      "objetivo": "30",
+      "operador": "<=",
+      "unidad": "ms",
+      "medido": "27.4",
+      "cobertura": "0.98900462962962962962962962962963",
+      "veredicto": "CUMPLE"
+    },
+    "jitter": {
+      "objetivo": "10",
+      "operador": "<=",
+      "unidad": "ms",
+      "medido": "9.9194499707431246342890579286132",
+      "cobertura": "0.98900462962962962962962962962963",
+      "veredicto": "CUMPLE"
+    },
+    "perdida": {
+      "objetivo": "0.5",
+      "operador": "<=",
+      "unidad": "%",
+      "medido": null,
+      "cobertura": "0.6",
+      "veredicto": "EVIDENCIA INSUFICIENTE"
+    },
+    "throughput": {
+      "objetivo": "180",
+      "operador": ">=",
+      "unidad": "Mbps",
+      "medido": "180.75",
+      "cobertura": null,
+      "veredicto": "CUMPLE"
+    },
+    "respuesta": {
+      "objetivo": "60",
+      "operador": "<=",
+      "unidad": "min",
+      "medido": "66",
+      "cobertura": "1",
+      "veredicto": "NO CUMPLE"
+    },
+    "mttr": {
+      "objetivo": "240",
+      "operador": "<=",
+      "unidad": "min",
+      "medido": "75",
+      "cobertura": "1",
+      "veredicto": "CUMPLE"
+    }
+  },
+  "credito_componentes": {
+    "disponibilidad": "0.1",
+    "respuesta": "0.05"
+  },
+  "credito_porcentaje": "15.00",
+  "credito_neto_clp": "180000.00",
+  "veredicto_global": "NO CUMPLE",
+  "supuestos": {
+    "jitter": "Se acepta el anexo 4; confirmar sesión independiente de la pérdida y cadencia de 60 s.",
+    "mttr": "Se evalúa conservadoramente desde inicio NMS hasta restauración.",
+    "periodo": "Denominador contractual fijo de 43200 min."
+  }
+}

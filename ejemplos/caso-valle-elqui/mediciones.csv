@@ -1,0 +1,21 @@
+fecha,metrica,valor,unidad,muestras_validas,muestras_esperadas,cobertura,valida,evidencia,observacion
+2026-09-09,caida_atribuible,55,min,,,1,si,E2,
+2026-09-21,caida_atribuible,75,min,,,1,si,E4,
+2026-09-27,caida_atribuible,30,min,,,1,si,E5,
+2026-09-30,latencia,27.4,ms,42725,43200,,si,Anexo 3,
+2026-09-07,jitter,9,ms,9870,43200,,si,Anexo 4,Anexo aceptado; verificar cadencia y procedencia
+2026-09-14,jitter,10.5,ms,10025,43200,,si,Anexo 4,Anexo aceptado; verificar cadencia y procedencia
+2026-09-21,jitter,13.8,ms,9900,43200,,si,Anexo 4,Anexo aceptado; verificar cadencia y procedencia
+2026-09-30,jitter,7.2,ms,12930,43200,,si,Anexo 4,Anexo aceptado; verificar cadencia y procedencia
+2026-09-18,perdida,0.31,%,,,0.6,si,Anexo 5,Solo 01 a 18 sep; no extrapolar
+2026-09-05,throughput,186,Mbps,,,,si,Anexo 6 iperf3 CPE,
+2026-09-12,throughput,182,Mbps,,,,si,Anexo 6 iperf3 CPE,
+2026-09-19,throughput,171,Mbps,,,,si,Anexo 6 iperf3 CPE,
+2026-09-26,throughput,184,Mbps,,,,si,Anexo 6 iperf3 CPE,
+2026-09-09,respuesta,23,min,,,1,si,INC-2611,
+2026-09-15,respuesta,33,min,,,1,si,INC-2648,
+2026-09-21,respuesta,66,min,,,1,si,INC-2672,
+2026-09-27,respuesta,7,min,,,1,si,INC-2690,
+2026-09-09,mttr,55,min,,,1,si,INC-2611,Inicio NMS a restauración; cota conservadora
+2026-09-21,mttr,75,min,,,1,si,INC-2672,Inicio NMS a restauración; cota conservadora
+2026-09-27,mttr,30,min,,,1,si,INC-2690,Inicio NMS a restauración; cota conservadora
