@@ -1,343 +1,416 @@
-# Verificación de SLA de Agrícola Valle de Elqui SpA
+# INFORME TÉCNICO DE VERIFICACIÓN DE SLA
+
+**Caso:** Agrícola Valle de Elqui SpA
 
-## 1 Identificación
+NOMBRE: Jose Alberto Tapia Cerda
 
-| Campo | Identificación |
-| --- | --- |
-| Servicio | Internet dedicado simétrico de 200 Mbps |
-| Cliente y ubicación | Agrícola Valle de Elqui SpA, planta Vicuña |
-| Proveedor | NorteNet Telecomunicaciones |
-| Período contractual | 1 al 30 de septiembre de 2026; 30 días; 43.200 minutos |
-| Demarcación | Puerto LAN del CPE instalado en la planta Vicuña |
-| Destinatario | Gerencia de Operaciones |
-| Integrantes | Jose Alberto Tapia Cerda |
-| Control del documento | Versión 1.1 del informe; emisión 4 de noviembre de 2026 |
+CARRERA: Ingeniería en Telecomunicaciones, Conectividad y Redes
 
-## 2 Resumen ejecutivo
+ASIGNATURA: Infraestructura de Telecomunicaciones Avanzada
 
-El SLA de septiembre no se cumple: disponibilidad de 99,62963% y respuesta de 66 minutos en INC-2672.
-Latencia, jitter y throughput cumplen; la pérdida mensual tiene evidencia insuficiente.
-La restauración cumple el límite de cuatro horas por incidente atribuible.
-Corresponde un crédito de 15%, equivalente a $180.000 neto sobre el cargo de $1.200.000.
+PROFESOR: Daniel Alejandro Ruz Moreno
 
-## 3 Alcance y referencias
+FECHA: 04/11/2026
+
+SECCIÓN: 2026/P DCIT06/D-CT0-N6-P3-C1/D La Serena CT
 
-Se evalúan las cláusulas 2.1, 2.2, 3.1 a 3.5, 4.1, 4.2, 5.1, 6.1, 6.2, 7.2 y 8.1 a 8.4 del extracto contractual [F1, p. 2]. El análisis cubre el acceso de Internet que soporta el ERP, la trazabilidad de exportación y la telefonía IP de la planta.
+Enlace al Repositorio: https://github.com/JoseTapiaIna/sla-toolkit-tapia/tree/v1.1
 
-La evidencia contractual termina en el puerto LAN del CPE. Las pruebas PE-core no representan ese trayecto y el resultado de un notebook por Wi-Fi incorpora factores ajenos al punto de medición pactado. El crédito se determina por las cláusulas del SLA, no por la percepción de calidad ni por un máximo observado aislado.
+## 1. Identificación
 
-### 3 1 Matriz de compromisos contractuales
+> • **Servicio:** Enlace de Internet dedicado simétrico de 200 Mbps (Cláusula 2.1).
+>
+> • **Cliente:** Agrícola Valle de Elqui SpA (Planta Vicuña).
+>
+> • **Proveedor:** NorteNet Telecomunicaciones.
+>
+> • **Período Evaluado:** Septiembre de 2026 (30 días / 43.200 minutos).
+>
+> • **Punto de Demarcación:** Puerto LAN del CPE instalado en la planta Vicuña (Cláusula 2.2).
+>
+> • **Cargo Mensual Neto:** \$1.200.000 CLP (Cláusula 8.4).
+>
+> • **Integrantes del Grupo:** Jose Alberto Tapia Cerda.
+>
+> • **Enlace al Repositorio:** https://github.com/JoseTapiaIna/sla-toolkit-tapia (Tag v1.1).
 
-| Cláusula y métrica | Objetivo y período | Punto y método | Estadístico |
-| --- | --- | --- | --- |
-| 3.1 Disponibilidad | ≥99,9% mensual | Servicio en demarcación; NMS y tickets | Minutos atribuibles sobre 43.200 min |
-| 3.2 Latencia | ≤30 ms; mes calendario | CPE a servidor del proveedor en La Serena; ICMP cada 60 s | RTT promedio mensual |
-| 3.3 Jitter | ≤10 ms; mes calendario | TWAMP desde demarcación; referencia RFC 3393 | Promedio mensual, ponderado por muestras |
-| 3.4 Pérdida | ≤0,5%; mes calendario | TWAMP desde demarcación | Paquetes perdidos / enviados |
-| 3.5 Throughput | ≥90% de 200 Mbps = 180 Mbps; ≥4 pruebas/mes | iperf3 TCP en demarcación; marco RFC 6349 | Promedio de las pruebas válidas |
-| 4.1 Respuesta | ≤60 min en 100% de incidentes | Apertura a primera respuesta; tickets | Evaluación individual; máximo de control |
-| 4.2 MTTR | ≤4 h = 240 min por incidente atribuible | Ticket y restauración NMS | Tiempo de restauración por incidente |
-| 5.1 Cobertura | ≥90% del mes | Registros en punto y método pactados | Datos válidos / datos esperados |
-| 6.1 y 6.2 Exclusiones | Aviso ≥72 h y ≤4 h/mes; fuerza mayor declarada; causas del cliente | Avisos, diagnósticos y responsabilidades | Tiempo excluido se considera disponible |
+## 2. Resumen Ejecutivo
 
-### 3 2 Marco técnico aplicado
+En septiembre de 2026, el enlace dedicado registró una disponibilidad de 99,63%, inferior al mínimo de 99,9%. Además, el ticket INC-2672 recibió su primera respuesta a los 66 minutos, superando el máximo de 60. La latencia, el jitter, el throughput y el MTTR cumplen; la pérdida de paquetes no se puede validar a nivel mensual por tener solo 60% de cobertura. El crédito aplicable es 15%: 10% por disponibilidad y 5% por respuesta, equivalentes a \$180.000 CLP netos.
 
-ITIL 4 Service Level Management se aplica al acuerdo, seguimiento y revisión de niveles de servicio. ISO/IEC 20000-1:2018 orienta la gestión del servicio, la medición y la mejora. ITU-T E.860 aporta la estructura del SLA y la delimitación de responsabilidades [N1-N3]. No se realiza una auditoría de certificación ISO.
+## 3. Alcance y Referencias
 
-ITU-T Y.1540 define parámetros de transferencia y disponibilidad IP. RFC 3393 describe la variación del retardo; RFC 5357 define TWAMP; RFC 6349 establece un marco de pruebas de throughput TCP [N4-N7]. Los umbrales 30 ms, 10 ms, 0,5% y 90% son contractuales. El uso de iperf3 no acredita, por sí solo, la ejecución completa de todos los procedimientos de RFC 6349.
+> • El presente informe evalúa el cumplimiento de los Acuerdos de Nivel de Servicio contractuales:
+>
+> • **Cláusulas Evaluadas:** 3.1 (Disponibilidad), 3.2 (Latencia), 3.3 (Jitter), 3.4 (Pérdida de Paquetes), 3.5 (Throughput), 4.1 (Tiempo de Respuesta) y 4.2 (MTTR).
+>
+> • **Cláusulas Regulatorias:** 5.1 (Validez de la Medición), 6.1 y 6.2 (Exclusiones y Tiempo Excluido), 7.2 (Respaldo Energético) y 8.1 a 8.4 (Créditos por Incumplimiento y Topes).
+>
+> • **Estándares y Normas de Medición Aplicados:**
+>
+> • ITU-T Y.1540 / Y.1541: Parámetros de rendimiento de transferencia de paquetes IP.
+>
+> • RFC 3393: Métrica para la variación del retardo de paquetes IP (Jitter).
+>
+> • RFC 5357: Protocolo de Medición Activa en Dos Vías (TWAMP).
+>
+> • RFC 6349: Marco de prueba para la medición del rendimiento del ancho de banda TCP (iperf3).
+>
+> • ITU-T E.860: Definición de puntos de demarcación e interfaces de red.
 
-## 4 Metodología
+## 4. Metodología
 
-Se correlacionan eventos NMS, avisos de mantención, diagnósticos y tickets por fecha. Se conservan los minutos reales de interrupción para evaluar disponibilidad; la exclusión modifica la atribución, no la duración del mes. El período se normaliza al denominador de 43.200 minutos fijado en el caso.
+Variables y Parámetros Contractuales:
 
-### 4 1 Evidencia y cobertura
+| **Métrica**    | **Unidad** | **Operador y Umbral** | **Período**    | **Punto de Medición**    | **Herramienta**       | **Estadístico Pactado**    |
+|----------------|------------|-----------------------|----------------|--------------------------|-----------------------|----------------------------|
+| Disponibilidad | %          | ≥ 99,9%               | Mes calendario | Demarcación CPE          | NMS del cliente       | Mensual acumulado          |
+| Latencia       | ms         | ≤ 30,0 ms             | Mes calendario | CPE a Servidor La Serena | ICMP (Zabbix)         | RTT promedio mensual       |
+| Jitter         | ms         | ≤ 10,0 ms             | Mes calendario | Demarcación CPE          | TWAMP (RFC 3393)      | Promedio mensual           |
+| Pérdida        | %          | ≤ 0,5%                | Mes calendario | Demarcación CPE          | TWAMP                 | Mensual acumulado          |
+| Throughput     | Mbps       | ≥ 180,0 Mbps (90%)    | Mes calendario | Puerto LAN del CPE       | iperf3 TCP (RFC 6349) | Promedio de mín. 4 pruebas |
+| T. Respuesta   | min        | ≤ 60 min              | Por incidente  | Tickets de soporte       | NMS / Tickets         | 100% de incidentes         |
+| MTTR           | horas      | ≤ 4 h (240 min)       | Por incidente  | Demarcación CPE          | NMS / Tickets         | Máximo por incidente       |
 
-| Métrica | Fuente y frecuencia | Cobertura y decisión |
-| --- | --- | --- |
-| Disponibilidad | Anexos 1 y 2; registro de eventos NMS y tickets | Se acepta el registro mensual del caso como completo. No se aporta bitácora cruda para auditar continuidad del NMS. |
-| Latencia | Anexo 3; Zabbix ICMP cada 60 s | 42.725 / 43.200 = 98,900463%; supera 90%. Se acepta promedio de 27,4 ms. |
-| Jitter | Anexo 4; cuatro bloques TWAMP, último de nueve días | 42.725 muestras entre 1 y 30-sep. Cobertura nominal 98,900463% si la cadencia es 60 s; supuesto por verificar. |
-| Pérdida | Anexo 5; TWAMP disponible del 1 al 18-sep | 18 / 30 = 60% de cobertura temporal nominal; inferior a 90%. Evidencia insuficiente. |
-| Throughput | Anexo 6; iperf3 TCP, cuatro flujos, 60 s | Cuatro pruebas válidas en CPE. Se aplica la frecuencia específica de 3.5, no muestreo continuo del mes. |
-| Respuesta y MTTR | Anexos 1 y 2; cuatro tickets correlacionados | Respuesta: 4/4 tickets. Restauración atribuible: 3/3 incidentes. MNT-0903 es aviso programado. |
+Evaluación de Evidencias y Suficiencia de Datos:
 
-### 4 2 Tratamiento de datos y límites
+> • **Latencia Zabbix Cliente:** Aceptada. Se validaron 42.725 / 43.200 muestras (98,90%, sobre el 90% mínimo de cláusula 5.1). Las 475 mediciones faltantes coinciden con interrupciones.
+>
+> • **Reporte de Latencia del Proveedor (22,1 ms):** Descartado. Medido entre el PE y su Core en Santiago, fuera del punto de demarcación pactado (Cláusula 2.2).
+>
+> • **Throughput iperf3 (CPE LAN):** Aceptado. 4 pruebas ejecutadas en el puerto LAN del CPE bajo norma RFC 6349.
+>
+> • **Speedtest Web Gerencia (95 Mbps):** Descartado. Realizado desde un notebook por Wi-Fi, sin validez técnica ni cumplimiento de demarcación.
 
-Los cálculos se realizan sin redondeos intermedios; las comparaciones usan el valor no redondeado. La desviación es medido menos objetivo; se expresa en puntos porcentuales (pp) para porcentajes. El 0,31% de pérdida parcial se conserva como observación del 1 al 18-sep; no se extrapola, no se reemplaza por cero y no genera un crédito demostrado.
+### 4.1. Cobertura y suficiencia de evidencia (cláusula 5.1)
 
-Se descartan el RTT de 22,1 ms y la pérdida de 0,18% del proveedor por corresponder al trayecto PE-core. Se descarta el Speedtest de 95 Mbps por herramienta, medio y punto distintos de los pactados. Se conserva como señal para diagnóstico interno de la LAN y el Wi-Fi.
+La validez se compara con el mínimo de **90%** de registros representativos del período; cuando el SLA prescribe pruebas puntuales, se aplica el mínimo específico de la métrica.
 
-El anexo 4 contiene jitter posterior al 19-sep, aunque el anexo 5 informa la detención del colector TWAMP. Para resolver el ejercicio se acepta el anexo 4 como evidencia independiente. Deben verificarse identificadores de sesión, colector, timestamps y cadencia; si proceden del mismo colector detenido y no existen registros alternativos, el jitter pasaría a evidencia insuficiente. Esta salvedad no cambia los dos incumplimientos demostrados ni el crédito calculado.
+| Indicador y fuente | Cálculo de cobertura / suficiencia | Decisión y dato pendiente |
+|:--|:--|:--|
+| Disponibilidad — NMS y tickets E1–E5 | Período contractual: 30 × 24 × 60 = 43.200 min. Cinco eventos clasificados | Registro de eventos aceptado para el ejercicio; no se dispone de serie NMS cruda para auditar continuidad de monitoreo |
+| Latencia — Zabbix ICMP | 42.725 / 43.200 × 100 = **98,90% ≥ 90%** | Aceptada; RTT promedio contractual 27,4 ms |
+| Jitter — TWAMP, anexo 4 | 42.725 / 43.200 × 100 = **98,90% nominal ≥ 90%** | Aceptado con salvedad: confirmar cadencia de 60 s, identificadores de sesión y colector independiente del de pérdida |
+| Pérdida — TWAMP, anexo 5 | 18 días / 30 días × 100 = **60% < 90%** | Evidencia insuficiente; recuperar mediciones hasta cubrir al menos 27 días representativos, con timestamps y paquetes enviados/perdidos |
+| Throughput — iperf3 en LAN del CPE | 4 pruebas válidas / mínimo 4 = **100% del requisito de pruebas** | Aceptado bajo cláusula 3.5; se requiere identificar dirección y parámetros para una auditoría ampliada |
+| Respuesta / restauración — tickets | 4 / 4 tickets de respuesta; 3 / 3 incidentes atribuibles de MTTR = **100% de registros disponibles** | Aceptados; se separan tiempos de inicio NMS y de apertura de ticket |
 
-Se consideran muestras comparables de jitter con el mismo método y configuración. No se equipara variación del RTT con retardo unidireccional. Tampoco se certifican por separado subida y bajada: el anexo de throughput entrega un único resultado por prueba sin identificar la dirección.
+### 4.2. Información faltante y fuentes descartadas
 
-## 5 Resultados
+Para la **pérdida mensual**, la interrupción del registro desde el 19-sep impide cumplir la cobertura mínima: el **0,31% observado durante 18 días no se extrapola** a todo septiembre. Se necesitan los registros adicionales o una medición alternativa desde la misma demarcación, con evidencia suficiente para el período. Para **jitter**, debe confirmarse si el anexo 4 dispone de una sesión TWAMP independiente después del 19-sep; si depende del colector detenido, también quedaría sin cobertura demostrada. Para **disponibilidad**, los eventos del caso permiten el cómputo, pero no se dispone de telemetría cruda continua para verificar el historial del NMS.
 
-### 5 1 Dictamen por métrica
+Se descartan: el RTT del proveedor de 22,1 ms y su pérdida de 0,18%, ambos medidos entre PE y core fuera de demarcación; y el Speedtest web de 95 Mbps, medido por Wi-Fi desde un notebook y no en el punto contractual. Las mediciones descartadas pueden orientar diagnósticos, pero no determinan créditos de SLA.
 
-| Métrica | Objetivo | Medido | Desviación | Evidencia | Veredicto |
-| --- | --- | --- | --- | --- | --- |
-| Disponibilidad | ≥99,9% | 99,629630% | −0,270370 pp | 160 min: E2, E4 y E5; anexos 1-2 | NO CUMPLE |
-| Latencia RTT | ≤30 ms | 27,4 ms | −2,6 ms | ICMP CPE-servidor; 42.725 muestras; anexo 3 | CUMPLE |
-| Jitter | ≤10 ms | 9,919450 ms | −0,080550 ms | TWAMP ponderado; 42.725 muestras; anexo 4* | CUMPLE* |
-| Pérdida | ≤0,5% mensual | No determinable; 0,31% parcial | No determinable | Solo 1-18 sep; cobertura nominal 60%; anexo 5 | EVIDENCIA INSUFICIENTE |
-| Throughput | ≥180 Mbps | 180,75 Mbps | +0,75 Mbps | Cuatro iperf3 TCP en CPE; anexo 6 | CUMPLE |
-| Respuesta | ≤60 min; 100% tickets | Máximo 66 min; 3/4 dentro de plazo | +6 min; cobertura de cumplimiento 75% | INC-2672; anexo 2 | NO CUMPLE |
-| MTTR por incidente | ≤240 min; atribuibles | 55, 71 y 27 min**; Máx. conservador 75 min | −169 min en máximo de trabajo; −165 min conservador | Tickets y fin NMS; anexos 1-2 | CUMPLE |
+## 5. Resultados de Evaluación
 
-* Cumplimiento con los agregados suministrados en el anexo 4 y la salvedad de procedencia y cadencia descrita en 4.2. La comparación exacta 9,919449970743… ≤ 10 evita que el redondeo o el promedio simple de bloques cambien el dictamen.
+Clasificación de Eventos de caída (Anexos 1 y 2)
 
-** Los valores de trabajo 55, 71 y 27 min utilizan bases temporales distintas. La sección 5.5 reconstruye ambos intervalos. Con un criterio uniforme y conservador desde el inicio NMS, los valores son 55, 75 y 30 min: todos cumplen. No se calcula un promedio entre incidentes para ocultar una eventual excedencia individual.
+| **Evento** | **Fecha / Horario** | **Duración** | **Clasificación** | **Fundamento y Cláusula Aplicada**                                                                                             |
+|------------|---------------------|--------------|-------------------|--------------------------------------------------------------------------------------------------------------------------------|
+| E1         | 03-sep 02:00–05:30  | 210 min      | Excluido          | Mantenimiento programado (MNT-0903). Avisado 29-ago (112 h de anticipación ≥ 72 h) y duración 3,5 h ≤ 4 h/mes (Cláusula 6.1a). |
+| E2         | 09-sep 14:12–15:07  | 55 min       | Atribuible        | Corte de fibra por obras viales (INC-2611). Responsabilidad de la ruta física del acceso del proveedor.                        |
+| E3         | 15-sep 10:40–12:25  | 105 min      | Excluido          | Corte eléctrico en planta cliente (INC-2648). CPE sin respaldo de energía UPS (Cláusulas 6.1c y 7.2).                          |
+| E4         | 21-sep 22:05–23:20  | 75 min       | Atribuible        | Falla de tarjeta de línea en PE La Serena (INC-2672). Falla directa de hardware del proveedor.                                 |
+| E5         | 27-sep 08:30–09:00  | 30 min       | Atribuible        | Mantenimiento de emergencia (INC-2690). Avisado 26-sep 18:00 (14,5 h de anticipación \< 72 h exigidas).                        |
 
-### 5 1 1 Veredicto global
+Cálculos Matemáticos Justificados
 
-NO CUMPLE. Se acreditan incumplimientos de disponibilidad y tiempo de respuesta. El cumplimiento de otras métricas no compensa estos resultados. La ausencia de evidencia mensual de pérdida impide afirmar su cumplimiento o incumplimiento; no invalida los incumplimientos documentados.
+### 5.1. Disponibilidad mensual:
 
-### 5 1 2 Conciliación de tiempos
+T_total = 30 días × 24 h × 60 min = 43.200 min \| T_caída = E2 (55) + E4 (75) + E5 (30) = 160 min
 
-Caída física observada = 210 + 55 + 105 + 75 + 30 = 475 min
+Disponibilidad = \[(43.200 - 160) / 43.200\] × 100 = 99,6296% ≈ 99,63%
 
-Tiempo excluido = 210 + 105 = 315 min
+Caída permitida (99,9%) = 43.200 × 0,001 = 43,20 min \| Exceso = 160 - 43,20 = 116,80 min
 
-Caída atribuible = 475 − 315 = 160 min
+### 5.2. Jitter mensual ponderado por muestras:
 
-Las 475 muestras faltantes de ICMP coinciden numéricamente con los 475 minutos de caída física. La correspondencia temporal exige revisar timestamps; esa coincidencia no demuestra por sí sola pérdida de paquetes ni permite reconstruir la serie TWAMP.
+Muestras totales = 9.870 + 10.025 + 9.900 + 12.930 = 42.725 muestras
 
-### 5 2 Clasificación de caídas y disponibilidad
+Suma ponderada = (9,0 × 9.870) + (10,5 × 10.025) + (13,8 × 9.900) + (7,2 × 12.930) = 423.808,5
 
-| Ev. | Intervalo de septiembre | Duración | Atribuible | Fundamento |
-| --- | --- | --- | --- | --- |
-| E1 | 03-sep; 02:00 a 05:30 | 210 min | 0 min | Mantención PE. Aviso 29-ago 10:00: 112 h antes. Duración 3 h 30 min ≤4 h/mes. Excluido por 6.1a; disponible según 6.2. |
-| E2 | 09-sep; 14:12 a 15:07 | 55 min | 55 min | Corte de fibra por obras viales. No consta fuerza mayor declarada que habilite 6.1b. Atribuible al proveedor. |
-| E3 | 15-sep; 10:40 a 12:25 | 105 min | 0 min | CPE sin energía durante corte eléctrico del cliente y sin UPS. Responsabilidad del cliente por 7.2; exclusión 6.1c y tratamiento 6.2. |
-| E4 | 21-sep; 22:05 a 23:20 | 75 min | 75 min | Falla de tarjeta de línea del PE La Serena; reemplazo. Equipo del proveedor, sin exclusión aplicable. |
-| E5 | 27-sep; 08:30 a 09:00 | 30 min | 30 min | Mantención de emergencia. Aviso 26-sep 18:00: 14 h 30 min antes, inferior a 72 h. No cumple 6.1a. |
+Jitter promedio = 423.808,5 / 42.725 = 9,9194 ms ≈ 9,92 ms (≤ 10,0 ms)
 
-E5 no se excluye por denominarse emergencia. El enunciado registra 14 h 30 min de anticipación, no 24 h; ambos valores quedarían bajo 72 h. E1 consume 210 de los 240 minutos mensuales permitidos de mantención programada. Los 30 min restantes no eximen a E5 del requisito de aviso.
+### 5.3. Throughput promedio (iperf3 TCP):
 
-### Cálculo paso a paso
+Throughput = (186 + 182 + 171 + 184) / 4 = 723 / 4 = 180,75 Mbps (90,38% del contratado ≥ 90%)
 
-1. T = 30 días × 24 h/día × 60 min/h = 43.200 min
+### 5.4. Latencia y pérdida de paquetes
 
-2. D = 55 + 75 + 30 = 160 min = 2 h 40 min
+La latencia contractual corresponde al **RTT promedio mensual** de Zabbix, **27,4 ms ≤ 30,0 ms** (anexo 3): desviación = 27,4 − 30,0 = **−2,6 ms**, por lo que cumple. El valor p95 de 41,2 ms y el pico de 118 ms describen episodios de degradación, pero no sustituyen al promedio pactado. La pérdida del anexo 5 alcanza **0,31% solo durante 18 días**; al tener **60% < 90%** de cobertura, no es posible determinar cumplimiento mensual ni acreditar un crédito por esta métrica.
 
-3. Tiempo disponible contractual = 43.200 − 160 = 43.040 min
+### 5.5. Tiempo de respuesta y MTTR por ticket (anexos 1 y 2)
 
-4. A = (43.040 / 43.200) × 100 = 99,6296296296…% ≈ 99,63%
+| Ticket | Fecha | Respuesta medida | Restauración desde NMS | Resultado contractual |
+|:--|:--|:--|:--|:--|
+| INC-2611 | 09-sep | 23 min ≤ 60 min | 55 min ≤ 240 min | Cumple |
+| INC-2648 | 15-sep | 33 min ≤ 60 min | 105 min — origen cliente | Respuesta cumple; excluido del MTTR atribuible (6.1c y 7.2) |
+| INC-2672 | 21-sep | **66 min > 60 min** | 75 min ≤ 240 min | **NO CUMPLE respuesta**, MTTR cumple |
+| INC-2690 | 27-sep | 7 min ≤ 60 min | 30 min ≤ 240 min | Cumple |
 
-5. Caída permitida = 43.200 × (1 − 0,999) = 43,2 min
+Tiempo de respuesta máximo = máx(23, 33, 66, 7) = **66 min**; excedencia = 66 − 60 = **6 min**. Solo 3 / 4 tickets cumplen los 60 min (**75%**, inferior al **100%** requerido). MTTR atribuible conservador desde NMS = máx(55, 75, 30) = **75 min ≤ 240 min**, por lo que cumple. Se utiliza la referencia uniforme de inicio de NMS para no mezclar duraciones desde la apertura del ticket (INC-2672: 71 min; INC-2690: 27 min).
 
-6. Exceso = 160 − 43,2 = 116,8 min = 1 h 56 min 48 s
+### Matriz general de resultados
 
-7. Desviación = 99,6296296296 − 99,9 = −0,2703703704 pp
+| Métrica | Objetivo | Medido | Desviación | Evidencia | Veredicto | Crédito |
+|:--|:--|:--|:--|:--|:--|:--|
+| Disponibilidad | ≥99,9% | 99,63% | −0,27 pp | NMS E2/E4/E5 | NO CUMPLE | 10% |
+| Latencia RTT | ≤30 ms | 27,4 ms | −2,6 ms | Zabbix CPE | CUMPLE | 0% |
+| Jitter | ≤10 ms | 9,92 ms | −0,08 ms | TWAMP | CUMPLE* | 0% |
+| Pérdida | ≤0,5% | No determinable (0,31% parcial) | No evaluable | TWAMP (60%) | EVIDENCIA INSUF. | 0% |
+| Throughput | ≥180 Mbps | 180,75 Mbps | +0,75 Mbps | iperf3 CPE | CUMPLE | 0% |
+| Respuesta | ≤60 min | 66 min | +6 min | INC-2672 | NO CUMPLE | 5% |
+| MTTR | ≤240 min | 75 min | −165 min | Tickets / NMS | CUMPLE | 0% |
 
-La cláusula 6.2 exige mantener los 43.200 minutos en el denominador: E1 y E3 se consideran disponibles para el SLA. La disponibilidad física sin exclusiones sería 98,900463%, pero no es la base del crédito. El valor contractual cae en 99,5% ≤ A <99,9%; la cláusula 8.1 asigna 10%.
+\* Jitter aceptado sujeto a comprobar independencia y cadencia de la captura TWAMP.
 
-### 5 3 Latencia jitter y pérdida
+Pérdida: 0,31% solo del 1 al 18-sep (60% de cobertura); no permite dictamen mensual.
 
-### Latencia
+## 6. Análisis de Incumplimientos
 
-Cobertura = 42.725 / 43.200 × 100 = 98,900462963% ≥90%
+| Incumplimiento y momento | Hecho y causa | Origen y repercusión en la operación |
+|:--|:--|:--|
+| **Disponibilidad — E2**. 09-sep, 14:12–15:07 (55 min) | Corte de fibra de acceso durante obras viales (INC-2611); no se acredita exclusión contractual | **Proveedor**, responsable de la ruta de acceso. Se interrumpe la conectividad de los servicios dependientes del enlace, incluidos ERP, trazabilidad y voz IP |
+| **Disponibilidad — E4**. 21-sep, 22:05–23:20 (75 min) | Falla de tarjeta de línea en PE La Serena (INC-2672) | **Proveedor**, equipamiento de red. Es la mayor interrupción individual atribuible; afecta la continuidad de ERP y telefonía IP |
+| **Disponibilidad — E5**. 27-sep, 08:30–09:00 (30 min) | Mantenimiento de emergencia informado con 14,5 h de anticipación, inferior a 72 h (INC-2690) | **Proveedor**, gestión de mantenimiento sin aviso suficiente. Se pierde conectividad durante la ventana y el tiempo cuenta en la indisponibilidad contractual |
+| **Respuesta — INC-2672**. 21-sep, apertura 22:09 y primera respuesta 23:15 | Respuesta a los **66 min**; excedencia de **6 min** respecto de cláusula 4.1 | **Soporte del proveedor**, plazo de atención incumplido. Retrasa el inicio formal de la gestión del incidente; no consta evidencia para cuantificar una prolongación adicional de la caída ni para atribuir la causa interna del retraso |
 
-RTT promedio = 27,4 ms ≤30 ms; margen = 30 − 27,4 = 2,6 ms
+La suma de E2 + E4 + E5 es **160 min** atribuibles. El corte eléctrico E3 del 15-sep fue causado por la ausencia de respaldo de energía del cliente y queda excluido; E1 fue una mantención válida conforme a aviso y duración. El impacto operacional indicado corresponde a la dependencia de los servicios respecto del enlace, no a un cálculo independiente de pérdidas financieras.
 
-CUMPLE. El promedio de 27,4 ms se toma del agregado de Zabbix; no se dispone de muestras individuales para recomputarlo. El p95 de 41,2 ms y el máximo de 118 ms describen dispersión, pero el SLA no fija límites de percentil o máximo. El promedio de 22,1 ms PE-core se descarta por punto y destino distintos de los pactados.
+## 7. Conclusiones Técnicas
 
-### Jitter ponderado por muestras válidas
+Liquidación de Créditos de Servicio:
 
-| Bloque | Días | Muestras nᵢ | Promedio Jᵢ | Producto nᵢ × Jᵢ |
-| --- | --- | --- | --- | --- |
-| 01 a 07-sep | 7 | 9.870 | 9,0 ms | 88.830,0 |
-| 08 a 14-sep | 7 | 10.025 | 10,5 ms | 105.262,5 |
-| 15 a 21-sep | 7 | 9.900 | 13,8 ms | 136.620,0 |
-| 22 a 30-sep | 9 | 12.930 | 7,2 ms | 93.096,0 |
-| Total | 30 | 42.725 | No aplica | 423.808,5 |
+> • **Crédito por Disponibilidad (Cláusula 8.1):** 99,63% corresponde al tramo de 10%, equivalente a \$120.000 CLP.
+>
+> • **Crédito por Tiempo de Respuesta (Cláusula 8.2):** Incumplimiento en INC-2672: 5%, equivalente a \$60.000 CLP.
+>
+> • **Total Crédito Aplicable:** 10% + 5% = 15% (\$180.000 CLP netos), inferior al tope contractual del 50%.
 
-1. N = 9.870 + 10.025 + 9.900 + 12.930 = 42.725 muestras
+Viabilidad de Infraestructura (Serie vs. Paralelo):
 
-2. S = 88.830 + 105.262,5 + 136.620 + 93.096 = 423.808,5
+> • **Modelo Serie (Actual):** A serie = 0,9995 × 0,9980 × 0,9999 × 0,9999 = 99,73%. El acceso único no asegura 99,9%.
+>
+> • **Modelo Paralelo (Radioenlace):** A acceso = 1 - \[(1 - 0,9980) × (1 - 0,9950)\] = 99,999%. A sistema = 99,93%; viable.
 
-3. J = Σ(nᵢ × Jᵢ) / Σnᵢ = 423.808,5 / 42.725
+Respuesta al Gerente de Operaciones:
 
-4. J = 9,919449970743… ms ≈ 9,92 ms ≤10 ms → CUMPLE
+> 1\. Speedtest 95 Mbps: No prueba incumplimiento. Se realizó por Wi-Fi; el iperf3 del CPE promedió 180,75 Mbps.
+>
+> 2\. Pico de 118 ms: Es señal de degradación, pero el RTT promedio mensual de 27,4 ms cumple el límite de 30 ms.
+>
+> 3\. Crédito del 50%: No corresponde; el cálculo sustentado suma 15% (\$180.000 CLP) por dos incumplimientos.
 
-El margen es 0,080550029257 ms. El promedio simple de los cuatro bloques sería 10,125 ms y produciría un dictamen incorrecto, porque asigna el mismo peso a bloques con distinto número de muestras. El último bloque comprende nueve días. El resultado es exacto respecto de los promedios tabulados; su precisión instrumental no puede verificarse sin datos crudos.
+## 8. Recomendaciones
 
-### Pérdida de paquetes
+| **Hallazgo**                                         | **Recomendación Técnica**                                | **Qué Mejora**                                                   | **Prioridad** |
+|------------------------------------------------------|----------------------------------------------------------|------------------------------------------------------------------|---------------|
+| Fibra de acceso única limita disponibilidad a 99,73% | Contratar respaldo por radioenlace de acceso (99,50%).   | Eleva disponibilidad teórica a 99,93%, permitiendo SLA de 99,9%. | Alta          |
+| CPE sin respaldo eléctrico (105 min en E3)           | Instalar UPS dedicada de al menos 1 kVA en rack del CPE. | Reduce interrupciones por cortes de energía en la planta.        | Alta          |
+| Primera respuesta de 66 min en INC-2672              | Exigir alertas y escalamiento antes de 60 minutos.       | Mejora el cumplimiento de los plazos de atención de incidentes.  | Alta          |
 
-Cobertura temporal nominal = 18 / 30 × 100 = 60% <90%
+## 9. Automatización del Proceso y Declaración de IA
 
-Cobertura mínima = 30 × 0,90 = 27 días; déficit = 27 − 18 = 9 días
+Se utilizó el repositorio `sla-toolkit-tapia` para registrar datos de entrada, criterios de SLA, cálculo de las siete métricas, pruebas unitarias, controles de consistencia y elaboración del informe. Se aplicó el **nivel básico de automatización** previsto en las especificaciones: se procesan automáticamente las mediciones y se incorpora la salida verificada al documento; el análisis técnico y las recomendaciones son redacción y revisión manual.
 
-EVIDENCIA INSUFICIENTE. Solo consta 0,31% para el 1 al 18-sep. El colector se detuvo por disco lleno el 19-sep y no se recuperó. Faltan contadores de enviados y recibidos, secuencias, timestamps y registros válidos posteriores para completar al menos 90% del período. Sin respaldo recuperable no es posible validar retroactivamente el mes. El 0,18% del proveedor no subsana el vacío porque corresponde a PE-core.
+| Etapa | Insumos y procedimiento | Carácter y salida |
+|:--|:--|:--|
+| 1. Preparación | Transcripción de anexos a `mediciones.csv`, eventos y tickets; configuración de `objetivos.yaml` | **Manual**, con registros de fuente y exclusiones |
+| 2. Cálculo | `herramientas/calc_sla.py` sobre YAML y CSV | **Automática**: `salida_calc.txt`, `salida_calc_sla.txt` y `resultados.json` |
+| 3. Verificación | Comparación de resultados, fórmulas manuales y cinco tests unitarios | **Automática** (tests y control de resultados) más **revisión manual** de salvedades |
+| 4. Redacción | Actualización de análisis, conclusiones y anexos en `informe.md` | **Manual con asistencia de IA**; no se extrapolan datos incompletos |
+| 5. Exportación | Pandoc + LibreOffice mediante `generar_informe.sh` | **Automática**: `informe.docx` e `informe.pdf` |
+| 6. Versionado | Commit y publicación del tag `v1.1` una vez revisada la entrega | **Manual**, verificable en GitHub |
 
-### 5 4 Throughput
+Comandos reproducibles, desde la **raíz del repositorio** en Ubuntu WSL (Python con dependencias previamente instaladas):
 
-| Fecha | Prueba válida | Resultado |
-| --- | --- | --- |
-| 05-sep | iperf3 TCP, cuatro flujos, 60 s; LAN del CPE | 186 Mbps |
-| 12-sep | iperf3 TCP, cuatro flujos, 60 s; LAN del CPE | 182 Mbps |
-| 19-sep | iperf3 TCP, cuatro flujos, 60 s; LAN del CPE | 171 Mbps |
-| 26-sep | iperf3 TCP, cuatro flujos, 60 s; LAN del CPE | 184 Mbps |
-
-1. Umbral = 0,90 × 200 = 180 Mbps
-
-2. Suma = 186 + 182 + 171 + 184 = 723 Mbps
-
-3. Promedio = 723 / 4 = 180,75 Mbps ≥180 Mbps → CUMPLE
-
-4. Proporción del contratado = 180,75 / 200 × 100 = 90,375%
-
-El margen es 0,75 Mbps, equivalente a 0,375 pp sobre el mínimo de 90%. La prueba de 171 Mbps merece revisión operativa, pero el contrato evalúa el promedio mensual. El Speedtest de 95 Mbps del 18-sep queda fuera del cálculo. Deben conservarse comandos, salida JSON, dirección de tráfico y condiciones de carga para verificar la simetría del servicio.
-
-### 5 5 Respuesta y restauración por incidente
-
-| Ticket | Apertura | Primera respuesta | Respuesta | Veredicto ≤60 min |
-| --- | --- | --- | --- | --- |
-| INC-2611 | 09-sep 14:18 | 14:41 | 23 min | CUMPLE |
-| INC-2648 | 15-sep 10:47 | 11:20 | 33 min | CUMPLE |
-| INC-2672 | 21-sep 22:09 | 23:15 | 66 min | NO CUMPLE |
-| INC-2690 | 27-sep 08:33 | 08:40 | 7 min | CUMPLE |
-
-Respuesta = primera respuesta − apertura. Para INC-2672: 23:15 − 22:09 = 66 min; exceso = 66 − 60 = 6 min. Cumplen 3/4 tickets = 75%, inferior al 100% exigido por 4.1. El origen cliente de INC-2648 excluye su restauración, pero no la respuesta: 4.1 se refiere a todos los incidentes.
-
-| Ticket | Restauración | Desde apertura | Desde inicio NMS | MTTR de trabajo |
-| --- | --- | --- | --- | --- |
-| INC-2611 | 15:07 | 49 min | 55 min | 55 min; cumple |
-| INC-2648 | 12:25 | 98 min | 105 min | No aplica; cliente |
-| INC-2672 | 23:20 | 71 min | 75 min | 71 min; cumple |
-| INC-2690 | 09:00 | 27 min | 30 min | 27 min; cumple |
-
-El extracto 4.2 no define el instante inicial. Los valores de trabajo 55/71/27 min mezclan inicio de caída en INC-2611 y apertura en los otros dos. Se muestran sin ocultar esa diferencia y se verifica la cota uniforme NMS: máximo 75 min ≤240 min. La disponibilidad siempre usa 55+75+30 min, sin sustituirlos por tiempos desde ticket.
-
-## 6 Análisis de incumplimientos
-
-| Hallazgo y fecha | Causa y origen | Impacto y efecto |
-| --- | --- | --- |
-| Disponibilidad; E2, 09-sep; 55 min | Corte de fibra de acceso por obras viales. Atribución al proveedor sin exclusión documentada. | Interrupción del enlace contratado; afecta conectividad de ERP, trazabilidad y voz que dependan de él. Aporta 55 min a la caída atribuible mensual. |
-| Disponibilidad; E4, 21-sep; 75 min | Falla de tarjeta de línea en PE La Serena. Origen en equipamiento del proveedor. | Pérdida de conectividad durante 75 min. Principal contribución individual a los 160 min atribuibles. |
-| Disponibilidad; E5, 27-sep; 30 min | Mantención de emergencia con aviso de 14 h 30 min. Gestión de cambios del proveedor sin requisito de exclusión. | Interrupción de 30 min contabilizada. La urgencia del trabajo no elimina el compromiso de disponibilidad. |
-| Tiempo de respuesta; INC-2672, 21-sep | Primera respuesta a los 66 min. No hay evidencia suficiente para determinar la causa organizacional del retraso. | Incumplimiento de 6 min del plazo de atención; genera crédito adicional de 5%. No implica incumplimiento del tiempo de restauración. |
-
-El impacto probado es la indisponibilidad del enlace y el retraso de primera respuesta. No se aportan registros para cuantificar pérdidas económicas, toneladas exportadas afectadas, transacciones fallidas o llamadas interrumpidas. Esos efectos deben contrastarse con bitácoras de las aplicaciones y de la operación de planta.
-
-La falla de energía E3 es una interrupción real de 105 min, pero se excluye del crédito por responsabilidad del cliente. La caída del colector desde el 19-sep es una falla de observabilidad del cliente; impide verificar pérdida y requiere una acción correctiva independiente del reclamo al proveedor.
-
-## 7 Conclusiones técnicas y crédito
-
-El incumplimiento global se sustenta en 99,6296296296% de disponibilidad y una respuesta de 66 min. Latencia, jitter bajo la salvedad indicada, throughput y restauración cumplen. La pérdida permanece sin dictamen mensual por insuficiencia de evidencia.
-
-| Concepto | Regla aplicada | Porcentaje | Monto neto |
-| --- | --- | --- | --- |
-| Disponibilidad | 8.1: 99,5% ≤99,62963% <99,9% | 10% | $120.000 |
-| Tiempo de respuesta | 8.2: un incumplimiento acreditado | 5% | $60.000 |
-| Otras métricas | Sin incumplimiento demostrado | 0% | $0 |
-| Total aplicable | 8.3: 15% <tope de 50% | 15% | $180.000 |
-
-Crédito porcentual = min(10% + 5%, 50%) = 15%
-
-Crédito neto = 0,15 × $1.200.000 = $180.000
-
-El tope equivale a $600.000; no es un crédito automático. No corresponde sumar 5% por cada caída ni cobrar por la pérdida no demostrada. El importe calculado es neto; no se añade IVA al monto solicitado en este dictamen.
-
-### 7 1 Respuesta técnica al gerente de operaciones
-
-| Afirmación o solicitud | Evaluación | Fundamento |
-| --- | --- | --- |
-| El enlace se cayó varias veces | Se sostiene | El NMS registra cinco interrupciones y 475 min físicos. Solo E2, E4 y E5 son atribuibles para el SLA: 160 min. E1 y E3 se excluyen. |
-| Speedtest de 95 Mbps prueba incumplimiento de los 200 Mbps | No se sostiene como prueba contractual | Se realizó en notebook por Wi-Fi con herramienta no pactada. Las cuatro pruebas iperf3 en CPE promedian 180,75 Mbps y cumplen el mínimo de 180 Mbps. |
-| Peaks de 118 ms prueban incumplimiento de latencia | No se sostiene con el estadístico pactado | La cláusula 3.2 evalúa RTT promedio mensual ≤30 ms. El promedio válido es 27,4 ms. Los peaks justifican diagnóstico, no ese crédito. |
-| Se debe exigir el crédito máximo de 50% | No se sostiene | El tramo de disponibilidad otorga 10%; la respuesta tardía añade 5%. Total 15% = $180.000 neto. La diferencia respecto del máximo solicitado es $420.000. |
-
-Gerencia de Operaciones: corresponde reclamar a NorteNet $180.000 neto por septiembre. La solicitud debe adjuntar la clasificación de E2, E4 y E5, sus 160 minutos de caída atribuible y el ticket INC-2672, cuya primera respuesta excedió el plazo en seis minutos. Los resultados de Speedtest y los máximos de Zabbix se pueden adjuntar como antecedentes de diagnóstico, identificando que no determinan los créditos contractuales.
-
-La ausencia de medición mensual válida de pérdida debe comunicarse expresamente. El crédito calculado se apoya en la evidencia disponible; cualquier revisión exige nuevos registros válidos en la demarcación. No corresponde presentar 0,31% o 0,18% como pérdida mensual acreditada del enlace.
-
-### 7 2 Expediente de reclamación
-
-Adjuntar el extracto de cláusulas 3.1, 4.1 y 8.1 a 8.4; el registro NMS de los tres eventos atribuibles; los diagnósticos y marcas de tiempo de los tickets; el aviso de E5; la tabla de cálculo; y la salida reproducible de la calculadora. Solicitar confirmación del crédito y un plan correctivo con responsable y fecha comprometida. El extracto no informa plazo ni canal formal para reclamar; deben verificarse en el contrato completo antes del envío.
-
-## 8 Recomendaciones y anexos
-
-### 8 1 Acciones priorizadas
-
-| Prioridad | Acción y responsable propuesto | Criterio de cierre |
-| --- | --- | --- |
-| Alta; Inmediata | TI del cliente: recuperar el colector, liberar capacidad controladamente, definir retención y alertas de disco, proceso y ausencia de muestras. | Prueba de alertas y exportación de registros; cobertura ≥90% en el siguiente período. Recuperar respaldo de septiembre si existe. |
-| Alta; Inmediata | NorteNet: corregir el escalamiento de incidentes y exigir acuse dentro de 60 min. Revisar INC-2672. | Causa del retraso documentada; escalamiento preventivo antes del límite y seguimiento del 100% de tickets. |
-| Alta; Antes de ampliar el servicio | NorteNet y TI: diseñar respaldo de acceso con ruta diversa, energía protegida y conmutación probada. Validar radioenlace propuesto. | Disponibilidad de diseño ≥99,9%, capacidad y calidad pactadas durante respaldo, tiempo de conmutación medido y aceptación conjunta. |
-| Alta; Próximo ciclo operativo | Cliente: instalar y mantener UPS del CPE y del acceso de respaldo, con autonomía definida según los cortes de planta. | Prueba bajo carga y corte de suministro; autonomía y alarmas documentadas. No se dimensiona una UPS sin potencia y duración requeridas. |
-| Alta; Antes del siguiente cierre | TI y NorteNet: verificar procedencia del jitter, cadencia TWAMP, puntos de prueba y sincronización temporal. Acordar inicio del tiempo de restauración. | Sesiones y colectores identificados; timestamps trazables; definición única de restauración aceptada. |
-| Media; Siguiente mantención | NorteNet: revisar protección de fibra frente a obras, repuestos de PE y procedimiento de cambios. | Acciones sobre E2/E4; avisos programados ≥72 h y control del máximo de 4 h/mes. |
-| Media; Siguiente mes | TI y NorteNet: repetir iperf3 en ambas direcciones y revisar el margen de 0,75 Mbps; analizar p95 y peaks de latencia. | Al menos cuatro pruebas válidas por mes, salidas JSON y dirección identificada. Revisar QoS/ruta sin afirmar causas no probadas. |
-| Media; Revisión del SLA | Gestor del servicio: acordar tratamiento de fuerza mayor, evidencia alternativa, percentiles de latencia y condiciones de respaldo. | Adenda con métricas, métodos, responsables y revisión periódica. Los nuevos objetivos no se aplican retroactivamente. |
-
-La revisión de niveles de servicio debe mantener un registro de acciones, responsable, fecha y evidencia de cierre. En términos de ITIL 4, se vinculan el seguimiento del SLA, la gestión de incidentes, problemas y cambios. La verificación del resultado y el ajuste posterior se integran a la mejora del sistema de gestión de servicios de ISO/IEC 20000-1.
-
-### 8 2 Anexo A Viabilidad de la infraestructura
-
-Las disponibilidades del anexo 7 son anuales. Se usan como parámetros de un modelo de planificación, bajo comportamiento estable e independencia de fallas; no sustituyen la disponibilidad mensual medida ni garantizan cada mes. Las cifras se convierten a fracciones antes de operar.
-
-| Componente | Disponibilidad | Fracción |
-| --- | --- | --- |
-| CPE | 99,95% | 0,9995 |
-| Fibra de acceso de ruta única | 99,80% | 0,9980 |
-| PE La Serena | 99,99% | 0,9999 |
-| Backbone | 99,99% | 0,9999 |
-| Radioenlace de acceso ofrecido | 99,50% | 0,9950 |
-
-### Ruta única en serie
-
-Aserie = ACPE × Afibra × APE × Abackbone
-
-Aserie = 0,9995 × 0,9980 × 0,9999 × 0,9999 = 0,99730150977501
-
-Aserie = 99,730150977501% ≈ 99,73% <99,9%
-
-Caída equivalente = (1 − 0,99730150977501) × 43.200 = 116,574778 min
-
-El diseño queda 0,169849 pp bajo el objetivo; la caída equivalente supera en 73,374778 min el presupuesto de 43,2 min. Es una proyección bajo los supuestos anteriores, no otra caída observada en septiembre. Además, la disponibilidad de un sistema en serie no supera la de su componente más débil: la fibra de 99,80% ya limita el diseño, incluso sin aplicar independencia.
-
-### Fibra y radio en paralelo con elementos comunes en serie
-
-Aacceso = 1 − (1 − Afibra) × (1 − Aradio)
-
-Aacceso = 1 − (0,0020 × 0,0050) = 0,99999 = 99,999%
-
-Atotal = 0,9995 × 0,99999 × 0,9999 × 0,9999
-
-Atotal = 0,99929011699390005 = 99,92901169939%
-
-Caída equivalente = (1 − Atotal) × 43.200 = 30,666946 min
-
-El modelo supera 99,9% y deja un margen equivalente de 12,533054 min frente al presupuesto mensual. CPE, PE y backbone permanecen comunes; el respaldo de acceso no elimina una falla de tarjeta en el mismo PE. Tampoco corrige la falta de UPS del cliente.
-
-La cifra ideal de 99,998650754888%, obtenida al poner toda la cadena actual en paralelo con 99,50%, solo aplicaría si el radio fuese un servicio completo e independiente. El anexo lo ofrece como acceso, por lo que esa cifra no se utiliza para recomendar la contratación.
-
-La ruta única no respalda por sí sola el objetivo de diseño. Se requiere mejorar la disponibilidad del acceso o añadir redundancia; el radio es una alternativa, no la única solución posible. Antes de contratar deben acreditarse diversidad física, independencia de fallas, capacidad útil, QoS, energía y conmutación. Sin esos datos y sin precio del respaldo no puede afirmarse garantía mensual ni rentabilidad económica.
-
-### 8 3 Anexo B Aplicación reproducible del toolkit
-
-El paquete adjunto incluye objetivos.yaml, CSV, calculadora, pruebas y salida ejecutada. Los CSV transcriben los anexos del caso; no se presentan como exportaciones originales. La calculadora compara sin redondeos intermedios, retiene la cobertura de pérdida y pondera el jitter por número de muestras.
-
-| Ruta dentro del repositorio | Contenido |
-| --- | --- |
-| README.md y CHANGELOG.md | Uso, requisitos, cambios y pendientes para v1.1 |
-| docs/ | Método, referencias y glosario |
-| plantillas/ y formulas/ | Plantillas reutilizables y fórmulas con variables y ejemplos |
-| herramientas/objetivos.yaml | Objetivos, coberturas, créditos y supuestos del caso |
-| herramientas/calc_sla.py | Verificación de siete métricas y cálculo del crédito |
-| ejemplos/caso-valle-elqui/ | sla.md, mediciones.csv, eventos.csv, tickets.csv, evidencia_descartada.csv e informe.md |
-| ejemplos/caso-valle-elqui/ | salida_calc_sla.txt, resultados.json y registro de pruebas |
-| tests/test_calc_sla.py | Pruebas de límites, cobertura, ponderación y tope |
-
-### Ejecución y salida obtenida
-
-```text
-python3 herramientas/calc_sla.py \
-  -o herramientas/objetivos.yaml \
-  -m ejemplos/caso-valle-elqui/mediciones.csv
+```bash
+source ~/eva3-sla-venv/bin/activate
+bash generar_informe.sh
 ```
+
+El script ejecuta internamente el siguiente procesamiento y las pruebas:
+
+```bash
+python3 herramientas/calc_sla.py \
+  -o ejemplos/caso-valle-elqui/objetivos.yaml \
+  -m ejemplos/caso-valle-elqui/mediciones.csv \
+  --json ejemplos/caso-valle-elqui/resultados.json \
+  > ejemplos/caso-valle-elqui/salida_calc.txt
+python3 -m unittest discover -s tests
+```
+
+La conversión utiliza **Pandoc para generar DOCX a partir de `informe.md` y LibreOffice para exportarlo a PDF**. Se conservan la plantilla `referencia_informe.docx` y las imágenes de `media/`; el proceso no necesita volver a crear capturas de terminal. Se verifica que el PDF producido no esté vacío. Si cambian las mediciones o los objetivos, se deben **revisar y actualizar manualmente las cifras narrativas** en Markdown antes de su entrega; la validación automatizada impide publicar inadvertidamente valores básicos incoherentes con el JSON. No se declara generación automática de todo el análisis interpretativo.
+
+**Declaración de uso de IA:** Se utilizó **ChatGPT** como apoyo para organización, redacción técnica, revisión de estilo, preparación de tablas y adaptación del documento a las especificaciones de INACAP. Se aportaron como contexto el PDF de especificaciones, el informe de referencia y archivos del repositorio, entre ellos `informe.md`, `objetivos.yaml`, `mediciones.csv`, `tickets.csv`, `resultados.json` y `salida_calc_sla.txt`. La verificación final de cifras se realizó mediante ejecución real de `calc_sla.py` en Ubuntu y cinco pruebas unitarias correctas, contrastando disponibilidad, jitter, throughput, respuesta, MTTR y crédito con las fórmulas del informe. Las capturas corresponden a la terminal utilizada por el autor. La revisión incluye separar las evidencias insuficientes de los incumplimientos acreditados.
+
+## Anexo: Evidencias Fotográficas de Configuración y Despliegue (Git)
+
+### Paso 01: Creación de la Rama
+
+Muestra el repositorio sla-toolkit-tapia y la rama caso/valle-elqui.
+
+![](media/image4.png){ width=15.4cm }
+
+### Paso 02: Estructura de Carpetas
+
+Directorio ejemplos/caso-valle-elqui y sus archivos publicados.
+
+![](media/image5.png){ width=15.4cm }
+
+### Paso 03: Extracto SLA
+
+Contenido del archivo ejemplos/caso-valle-elqui/sla.md.
+
+![](media/image6.png){ width=15.4cm }
+
+### Paso 04: Configuración YAML
+
+Umbrales y créditos en herramientas/objetivos.yaml.
+
+![](media/image7.png){ width=15.4cm }
+
+### Paso 05: Dataset de Mediciones
+
+Registros del caso en ejemplos/caso-valle-elqui/mediciones.csv.
+
+![](media/image8.png){ width=15.4cm }
+
+### Paso 06: Registro de Cambios
+
+Historial de la versión 1.1 publicado en CHANGELOG.md.
+
+![](media/image9.png){ width=15.4cm }
+
+### Paso 07: Commit y Merge
+
+Verificación de la integración de la rama caso/valle-elqui en main y del historial real de commits.
+
+![](media/image10.png){ width=15.4cm }
+
+### Paso 08: Verificación de publicación del Tag v1.1
+
+Consulta de las etiquetas publicadas en el repositorio remoto; no representa un nuevo push.
+
+![](media/image11.png){ width=15.4cm }
+
+Repositorio: https://github.com/JoseTapiaIna/sla-toolkit-tapia
+
+Evidencias: capturas originales de la terminal Ubuntu WSL del repositorio sla-toolkit-tapia.
+
+## ANEXO TÉCNICO A · COBERTURA, RESULTADOS Y TICKETS
+
+### A.1. Cobertura por evidencia (cláusula 5.1: mínimo 90% de datos válidos)
+
+| **Métrica**       | **Datos disponibles / esperados** | **Cobertura** | **Decisión**          |
+|-------------------|-----------------------------------|---------------|-----------------------|
+| Latencia Zabbix   | 42.725 / 43.200 muestras          | 98,90046%     | Aceptada; RTT 27,4 ms |
+| Jitter TWAMP      | 42.725 / 43.200 muestras\*        | 98,90046%\*   | Aceptada con salvedad |
+| Pérdida TWAMP     | 18 / 30 días de registros         | 60%           | Insuficiente          |
+| Throughput iperf3 | 4 pruebas CPE válidas             | 4 / 4 pruebas | Aceptada              |
+| Respuesta         | 4 tickets de 4                    | 100%          | Un incumplimiento     |
+| MTTR atribuible   | 3 incidentes de 3                 | 100%          | Cumple ≤240 min       |
+
+\* La cobertura de jitter supone una muestra cada 60 segundos y debe verificarse la independencia del colector TWAMP que reportó interrupción de registros de pérdida desde el 19-sep.
+
+### A.2. Tiempos de respuesta y restauración por ticket (anexos 1 y 2)
+
+| **Ticket** | **Fecha** | **Respuesta** | **Límite** | **Desde NMS a restauración** | **Dictamen**                 |
+|------------|-----------|---------------|------------|------------------------------|------------------------------|
+| INC-2611   | 09-sep    | 23 min        | ≤60 min    | 55 min                       | Cumple                       |
+| INC-2648   | 15-sep    | 33 min        | ≤60 min    | 105 min (cliente)            | Excluido del MTTR atribuible |
+| INC-2672   | 21-sep    | 66 min        | ≤60 min    | 75 min                       | Respuesta NO cumple          |
+| INC-2690   | 27-sep    | 7 min         | ≤60 min    | 30 min                       | Cumple                       |
+
+Respuesta máxima = máx(23, 33, 66, 7) = 66 min; exceso = 66 − 60 = 6 min. Cumplimiento por ticket = 3/4 = 75%, inferior al 100% exigido. MTTR atribuible conservador = máx(55, 75, 30) = 75 min \< 240 min (cumple).
+
+### A.3. Estadísticos y límites
+
+• Disponibilidad = (43.200 − 55 − 75 − 30) / 43.200 × 100 = 99,6296296% (\< 99,9%).
+
+• Indisponibilidad permitida = 43.200 × (1 − 0,999) = 43,2 min; exceso = 160 − 43,2 = 116,8 min.
+
+• Jitter = (9×9.870 + 10,5×10.025 + 13,8×9.900 + 7,2×12.930)/42.725 = 9,91945 ms.
+
+• Latencia: RTT promedio mensual Zabbix = 27,4 ms ≤30 ms; p95 41,2 ms y pico 118 ms no son umbrales pactados.
+
+• Throughput = (186 + 182 + 171 + 184)/4 = 180,75 Mbps ≥180 Mbps.
+
+• Pérdida: 0,31% se midió solo del 1 al 18-sep; no es válido determinar el resultado mensual con 60% de cobertura.
+
+• Crédito = min(10% por disponibilidad + 5% por respuesta, 50% de tope) = 15%; 0,15 × \$1.200.000 = \$180.000 CLP netos.
+
+## ANEXO TÉCNICO B · ARCHIVOS DE ENTRADA
+
+### B.1. objetivos.yaml · Configuración real del caso
+
+El archivo `ejemplos/caso-valle-elqui/objetivos.yaml` es una copia sincronizada del archivo fuente `herramientas/objetivos.yaml`, con idénticos umbrales. El generador comprueba la identidad de ambas configuraciones antes del cálculo.
+
+```yaml
+servicio: Internet dedicado simétrico 200 Mbps - Agrícola Valle de Elqui SpA
+proveedor: NorteNet Telecomunicaciones
+periodo: '2026-09'
+minutos_periodo: 43200
+cobertura_minima: 0.90
+cargo_mensual: 1200000
+tope_credito: 0.50
+credito_otras: 0.05
+demarcacion: Puerto LAN del CPE de planta Vicuña
+metricas:
+  disponibilidad: {operador: '>=', objetivo: 99.9, unidad: '%'}
+  latencia: {operador: '<=', objetivo: 30, unidad: ms, estadistico: promedio}
+  jitter: {operador: '<=', objetivo: 10, unidad: ms, estadistico: ponderado_muestras}
+  perdida: {operador: '<=', objetivo: 0.5, unidad: '%'}
+  throughput: {operador: '>=', objetivo: 180, unidad: Mbps, minimo_pruebas: 4}
+  respuesta: {operador: '<=', objetivo: 60, unidad: min, estadistico: maximo}
+  mttr: {operador: '<=', objetivo: 240, unidad: min, estadistico: por_incidente}
+creditos_disponibilidad:
+  - {desde: 99.5, hasta: 99.9, credito: 0.10}
+  - {desde: 99.0, hasta: 99.5, credito: 0.25}
+  - {desde: 0.0, hasta: 99.0, credito: 0.50}
+supuestos:
+  jitter: Se acepta el anexo 4; confirmar sesión independiente de la pérdida y cadencia de 60 s.
+  mttr: Se evalúa conservadoramente desde inicio NMS hasta restauración.
+  periodo: Denominador contractual fijo de 43200 min.
+```
+
+Los umbrales, comparadores, créditos y supuestos son datos de entrada para calc_sla.py.
+
+### B.2. Mediciones del caso
+
+**mediciones.csv — transcripción de los anexos del caso, no exportación cruda del NMS.**
+
+```csv
+fecha,metrica,valor,unidad,muestras_validas,muestras_esperadas,cobertura,valida,evidencia,observacion
+2026-09-09,caida_atribuible,55,min,,,1,si,E2,
+2026-09-21,caida_atribuible,75,min,,,1,si,E4,
+2026-09-27,caida_atribuible,30,min,,,1,si,E5,
+2026-09-30,latencia,27.4,ms,42725,43200,,si,Anexo 3,
+2026-09-07,jitter,9,ms,9870,43200,,si,Anexo 4,Anexo aceptado; verificar cadencia y procedencia
+2026-09-14,jitter,10.5,ms,10025,43200,,si,Anexo 4,Anexo aceptado; verificar cadencia y procedencia
+2026-09-21,jitter,13.8,ms,9900,43200,,si,Anexo 4,Anexo aceptado; verificar cadencia y procedencia
+2026-09-30,jitter,7.2,ms,12930,43200,,si,Anexo 4,Anexo aceptado; verificar cadencia y procedencia
+2026-09-18,perdida,0.31,%,,,0.6,si,Anexo 5,Solo 01 a 18 sep; no extrapolar
+2026-09-05,throughput,186,Mbps,,,,si,Anexo 6 iperf3 CPE,
+2026-09-12,throughput,182,Mbps,,,,si,Anexo 6 iperf3 CPE,
+2026-09-19,throughput,171,Mbps,,,,si,Anexo 6 iperf3 CPE,
+2026-09-26,throughput,184,Mbps,,,,si,Anexo 6 iperf3 CPE,
+2026-09-09,respuesta,23,min,,,1,si,INC-2611,
+2026-09-15,respuesta,33,min,,,1,si,INC-2648,
+2026-09-21,respuesta,66,min,,,1,si,INC-2672,
+2026-09-27,respuesta,7,min,,,1,si,INC-2690,
+2026-09-09,mttr,55,min,,,1,si,INC-2611,Inicio NMS a restauración; cota conservadora
+2026-09-21,mttr,75,min,,,1,si,INC-2672,Inicio NMS a restauración; cota conservadora
+2026-09-27,mttr,30,min,,,1,si,INC-2690,Inicio NMS a restauración; cota conservadora
+```
+
+Las observaciones de cobertura incompleta no se extrapolan a septiembre completo.
+
+## ANEXO TÉCNICO C · VALIDACIÓN Y REGENERACIÓN
+
+### C.1. Salida completa verificada de calc_sla.py
+
+Salida de `ejemplos/caso-valle-elqui/salida_calc.txt` (también conservada en `salida_calc_sla.txt` para compatibilidad).
 
 ```text
 PERIODO 2026-09
@@ -356,77 +429,33 @@ MTTR: cota conservadora NMS; valores 55, 75 y 30 min.
 Perdida: cobertura parcial 60%; no genera credito demostrado.
 ```
 
-La restauración de 75 min de esta salida es la cota conservadora NMS. No contradice los valores de trabajo 55/71/27 min: utiliza un origen temporal uniforme, documentado en objetivos.yaml. La salida no asigna cumplimiento a datos ausentes ni calcula crédito por una pérdida sin cobertura suficiente.
+### C.2. Pruebas automatizadas y verificación local
 
-Validación ejecutada: cinco pruebas satisfactorias. Se verificaron el crédito del caso y la ponderación, el límite inclusivo de respuesta de 60 min, la falta de una prueba de throughput, la ausencia de jitter y los límites del tramo de disponibilidad y del tope de crédito.
+python -m unittest discover -s tests
 
-### 8 4 Anexo C Integración y versionado
+Ran 5 tests in 0.017s — OK
 
-### 8 4 Anexo C Integración y versionado
+Registro visual de la ejecución aportado por el autor:
 
-El código, las mediciones y el informe del caso se mantienen en el repositorio del toolkit. La ejecución de la calculadora y las pruebas se documenta en el anexo B.
+![](media/image12.png){ width=15cm }
 
-| Campo de entrega | Identificación |
-| --- | --- |
-| Repositorio | https://github.com/JoseTapiaIna/sla-toolkit-tapia |
-| Ruta del caso | ejemplos/caso-valle-elqui/ |
-| Etiqueta de entrega | v1.1 |
-| Integrante | Jose Alberto Tapia Cerda |
-| Licencia del código | MIT |
+![](media/image13.png){ width=15cm }
 
-Las correcciones se registran en CHANGELOG.md y se integran a main mediante una rama de trabajo. La etiqueta de entrega debe apuntar al commit que contiene los archivos verificados.
+### C.3. Regeneración del PDF desde el Markdown
 
-Las mejoras futuras incluyen la ingestión de registros crudos, el cálculo de cobertura mediante timestamps y la verificación de ambas direcciones de throughput.
+Se utiliza el comando `bash generar_informe.sh` desde la raíz del repositorio, con el entorno Python activado. Este ejecuta `calc_sla.py`, guarda `salida_calc.txt` y `resultados.json`, valida las cifras del Markdown, ejecuta los tests y convierte el informe con Pandoc y LibreOffice. La conversión no requiere LaTeX.
 
-### 8 5 Anexo D Datos necesarios para cerrar las salvedades
+```bash
+source ~/eva3-sla-venv/bin/activate
+bash generar_informe.sh
+```
 
-Para pérdida: recuperar los registros posteriores al 18-sep o un conjunto alternativo desde la misma demarcación, con enviados, recibidos y timestamps que cubran al menos 90% del mes. Para jitter: identificar el colector y la sesión que generaron los bloques posteriores al 19-sep y confirmar la cadencia. Para MTTR: acordar por escrito el origen y el hito de restauración. Para throughput: identificar dirección, servidor, parámetros y condiciones de carga de cada ejecución.
+Este PDF de entrega se genera desde este archivo Markdown mediante `generar_informe.sh`, Pandoc y LibreOffice. Las capturas del sistema fueron obtenidas en Ubuntu WSL y se incorporaron como evidencia visual. El formato del PDF regenerado puede diferir de la versión Word de referencia, sin alterar las cifras o el análisis.
 
-Para la solución de respaldo: solicitar topología, puntos comunes, disponibilidad aplicable al acceso, capacidad, QoS, tiempo de conmutación, protección eléctrica y cotización. La aceptación debe incorporar una prueba de caída de fibra y recuperación por radio con tráfico de los servicios críticos.
+**Trazabilidad de la entrega:** el tag v1.1 debe referirse al commit que incluya este Markdown, sus imágenes, el PDF generado y el script de reproducción. Las ejecuciones previas de los ocho pasos fueron capturadas en Ubuntu WSL; no se presentan como capturas de acciones realizadas por otra persona.
 
-### 8 6 Anexo E Fuentes y trazabilidad
+```{=openxml}
+<w:p><w:r><w:br w:type="page"/></w:r></w:p>
+```
 
-### Documentos del caso
-
-| ID | Documento y uso |
-| --- | --- |
-| F1 | EVA 3 CASO DE ESTUDIO.pdf. P. 1: contexto y correo; p. 2: contrato; p. 3: anexos 1-4; p. 4: anexos 5-7; pp. 5-6: tareas, estructura y rúbrica. Fuente de cifras y cláusulas. |
-| F2 | PautaToolkit_SLA.pdf. Método, normas, estructura del repositorio y requisitos de calculadora y versionado. |
-| F3 | Caso_Clinica_Limari.pdf. Referencia metodológica para la estructura del informe y la aplicación del toolkit. Sus cifras y cláusulas no se trasladan al caso Valle de Elqui. |
-| F4 | SLA y niveles de servicio en redes.pdf. Material docente de métricas, exclusiones, fórmulas y disponibilidad en serie y paralelo. |
-
-### Referencias técnicas primarias
-
-[N1] PeopleCert. ITIL 4 Practitioner Service Level Management.
-
-https://www.peoplecert.org/ITIL4-practices
-
-[N2] ISO/IEC 20000-1:2018. Service management system requirements. Referencia al marco de gestión.
-
-https://www.iso.org/standard/70636.html
-
-[N3] ITU-T E.860 (06/2002). Framework of a service level agreement.
-
-https://www.itu.int/rec/T-REC-E.860
-
-[N4] ITU-T Y.1540 (12/2019). IP packet transfer and availability performance parameters.
-
-https://www.itu.int/rec/T-REC-Y.1540/en
-
-[N5] RFC 3393 (2002). IP Packet Delay Variation Metric for IPPM.
-
-https://www.rfc-editor.org/rfc/rfc3393.html
-
-[N6] RFC 5357 (2008). A Two-Way Active Measurement Protocol.
-
-https://www.rfc-editor.org/rfc/rfc5357.html
-
-[N7] RFC 6349 (2011). Framework for TCP Throughput Testing.
-
-https://www.rfc-editor.org/rfc/rfc6349.html
-
-Consulta de referencias técnicas: 4 de noviembre de 2026. Los métodos se aplican conforme al extracto contractual; las referencias normativas no alteran el período, las exclusiones o los porcentajes de crédito del caso.
-
-### Criterio de lectura de resultados
-
-CUMPLE: evidencia aceptada y valor dentro del objetivo. NO CUMPLE: evidencia suficiente de una excedencia contractual. EVIDENCIA INSUFICIENTE: no se dispone de datos válidos para decidir. Los supuestos se identifican donde afectan la cobertura o el modelo; las hipótesis de diseño no se presentan como mediciones operativas.
+![](media/image3.png){ width=15cm }

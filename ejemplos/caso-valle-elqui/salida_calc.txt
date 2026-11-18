@@ -1,0 +1,14 @@
+PERIODO 2026-09
+METRICA         MEDIDO              VEREDICTO
+disponibilidad  99.629630 %         NO CUMPLE
+latencia        27.400000 ms        CUMPLE
+jitter          9.919450 ms         CUMPLE
+perdida         No determinable     EVIDENCIA INSUFICIENTE
+throughput      180.750000 Mbps     CUMPLE
+respuesta       66.000000 min       NO CUMPLE
+mttr            75.000000 min       CUMPLE
+GLOBAL: NO CUMPLE
+CREDITO: 15.00% = CLP 180000 neto
+Jitter: anexo 4 aceptado; verificar origen y cadencia.
+MTTR: cota conservadora NMS; valores 55, 75 y 30 min.
+Perdida: cobertura parcial 60%; no genera credito demostrado.
